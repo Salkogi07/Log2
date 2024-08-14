@@ -71,6 +71,8 @@ public class GameManager : MonoBehaviour
     public bool isBossSpawned;
     public Player player;
 
+    public bool isEnemyMove = true;
+
     private void Awake()
     {
         instance = this;
