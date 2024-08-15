@@ -7,7 +7,7 @@ public class PlayerAttackDamage : MonoBehaviour
     private enum InfoType { Attack, Skill}
     [SerializeField] private InfoType type;
 
-    [SerializeField] private float damage;
+    [SerializeField] public float damage;
     [SerializeField] private float duringObject;
 
     Transform tr;

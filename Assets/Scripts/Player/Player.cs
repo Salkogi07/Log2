@@ -78,7 +78,7 @@ public class Player : MonoBehaviour
 
         if(GameManager.instance.health < 0)
         {
-            for (int index = 3; index < transform.childCount; index++)
+            for (int index = 2; index < transform.childCount; index++)
             {
                 transform.GetChild(index).gameObject.SetActive(false);
             }
@@ -96,7 +96,7 @@ public class Player : MonoBehaviour
         {
             if (GameManager.instance.health < 0)
             {
-                for (int index = 3; index < transform.childCount; index++)
+                for (int index = 2; index < transform.childCount; index++)
                 {
                     transform.GetChild(index).gameObject.SetActive(false);
                 }

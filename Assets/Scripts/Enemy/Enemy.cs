@@ -7,34 +7,30 @@ public class Enemy : MonoBehaviour
     public float speed;
     public float health;
     public float maxHealth;
-    public float getExp;
+    public int getExp;
     public Rigidbody2D target;
 
-    bool isLive;
     public bool isSkillMove = true;
 
     Rigidbody2D rb;
-    Collider2D coll;
     SpriteRenderer sprite;
-    Animator anim;
     WaitForFixedUpdate wait;
     public GameObject hitPartical;
+    public GameObject diePartical;
 
     private void Awake()
     {
-        anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        coll = GetComponent<Collider2D>();
         sprite = GetComponent<SpriteRenderer>();
         wait = new WaitForFixedUpdate();
     }
 
     private void FixedUpdate()
     {
-        if (GameManager.instance.IsLive)
+        if (!GameManager.instance.IsLive)
             return;
 
-        if(!isLive || GameManager.instance.isEnemyMove || !isSkillMove)
+        if(!GameManager.instance.isEnemyMove || !isSkillMove)
         {
             rb.velocity = Vector3.zero;
             return;
@@ -48,21 +44,57 @@ public class Enemy : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (GameManager.instance.IsLive)
+        if (!GameManager.instance.IsLive)
+            return;
+
+        if (!GameManager.instance.isEnemyMove)
             return;
 
         sprite.flipX = target.position.x < rb.position.x;
     }
 
-    private void OnEnable()
+    private void Start()
     {
         target = GameManager.instance.player.GetComponent<Rigidbody2D>();
-        isLive = true;
-        coll.enabled = true;
-        rb.simulated = true;
-        sprite.sortingOrder = 2;
         health = maxHealth;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!collision.CompareTag("Bullet"))
+            return;
 
+        health -= collision.GetComponent<PlayerAttackDamage>().damage;
+        Destroy(collision.gameObject);
+        StartCoroutine(KnockBack());
+
+        if(health > 0)
+        {
+            Instantiate(hitPartical,gameObject.transform.position,Quaternion.identity);
+        }
+        else
+        {
+            if (gameObject.CompareTag("Boss"))
+            {
+                GameManager.instance.GameWin();
+                Instantiate(diePartical,gameObject.transform.position,Quaternion.identity);
+                Destroy(gameObject);
+            }
+            else
+            {
+                GameManager.instance.killEnemyCount++;
+                GameManager.instance.AddExp(getExp);
+                Instantiate(diePartical,gameObject.transform.position,Quaternion.identity);
+                Destroy(gameObject);
+            }
+        }
+    }
+
+    IEnumerator KnockBack()
+    {
+        yield return wait;
+        Vector3 playerPos = GameManager.instance.player.transform.position;
+        Vector3 dirVec = transform.position - playerPos;
+        rb.AddForce(dirVec.normalized * 3, ForceMode2D.Impulse);
+    }
 }

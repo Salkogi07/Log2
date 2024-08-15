@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -68,10 +71,17 @@ public class GameManager : MonoBehaviour
     public float item_StopEnemyTimer = 0;
 
     [Header("GameObject")]
-    public bool isBossSpawned;
     public Player player;
+    public bool isBossSpawned;
+    public GameObject bossObj;
+
+    public GameObject HUDPanel;
+    public GameObject winPanel;
+    public GameObject losePanel;
+    public GameObject levelUpPanel;
 
     public bool isEnemyMove = true;
+
 
     private void Awake()
     {
@@ -81,6 +91,8 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        MasterKey();
+
         if (!IsLive)
         {
             return;
@@ -92,9 +104,76 @@ public class GameManager : MonoBehaviour
         {
             gameTime = maxGameTime;
             isBossSpawned = true;
+            SpanwBoss();
         }
 
         ReChargeMana();
+    }
+
+    private void MasterKey()
+    {
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            Scene currentScene = SceneManager.GetActiveScene();
+            int currentIndex = currentScene.buildIndex;
+
+            if (currentIndex == 1)
+            {
+                SceneManager.LoadScene(2);
+            }
+            else if (currentIndex == 2)
+            {
+                SceneManager.LoadScene(3);
+            }
+            else if (currentIndex == 3)
+            {
+                SceneManager.LoadScene(1);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            exp += 100000000;
+            GetExp();
+        }
+
+        if (Input.GetKeyDown(KeyCode.F3))
+        {
+            isMasterDamge = !isMasterDamge;
+        }
+
+        if (Input.GetKeyDown(KeyCode.F4))
+        {
+            health = maxHealth;
+            mana = maxMana;
+        }
+
+        if (Input.GetKeyDown(KeyCode.F5))
+        {
+            //ItmeSetPanel.SetActive(!ItmeSetPanel.activeInHierarchy);
+        }
+
+        if (Input.GetKeyDown(KeyCode.F6))
+        {
+            //EnemySetPanel.SetActive(!EnemySetPanel.activeInHierarchy);
+        }
+
+        if (Input.GetKeyDown(KeyCode.F7))
+        {
+            foreach (GameObject enemyObj in GameObject.FindGameObjectsWithTag("Enemy"))
+            {
+                Destroy(enemyObj);
+            }
+        }
+    }
+
+    private void SpanwBoss()
+    {
+        foreach(GameObject enemyObj in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            Destroy(enemyObj);
+        }
+        Instantiate(bossObj,player.transform.position + Vector3.up * 4, Quaternion.identity);
     }
 
     private void ReChargeMana()
@@ -127,6 +206,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void GameStart()
+    {
+        health = maxHealth;
+        Time.timeScale = 1f;
+        IsLive = true;
+        HUDPanel.SetActive(true);
+    }
+
     public void AddExp(int exp)
     {
         this.exp += exp;
@@ -143,9 +230,69 @@ public class GameManager : MonoBehaviour
         this.mana = Mathf.Clamp(this.mana + mana, 0, maxMana);
     }
 
+    public void GameWin()
+    {
+        StartCoroutine(GameWinRoutine());
+    }
 
     public void GameOver()
     {
+        StartCoroutine(GameOverRoutine());
+    }
 
+    IEnumerator GameWinRoutine()
+    {
+        IsLive = false;
+        HUDPanel.SetActive(false);
+        yield return new WaitForSeconds(1f);
+        winPanel.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+    IEnumerator GameOverRoutine()
+    {
+        IsLive = false;
+        HUDPanel.SetActive(false);
+        yield return new WaitForSeconds(0.5f);
+        losePanel.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+    public void Stage1()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    public void Stage2()
+    {
+        SceneManager.LoadScene(2);
+    }
+
+    public void Stage3()
+    {
+        SceneManager.LoadScene(3);
+    }
+
+    public void Ending()
+    {
+        SceneManager.LoadScene(4);
+    }
+
+    public void GameExit()
+    {
+        Application.Quit();
+    }
+
+    void SpeedUP()
+    {
+        if (speedCount < 5)
+        {
+            speed += 0.5f;
+        }
+        else
+        {
+            AddExp(20);
+        }
+        speedCount++;
     }
 }
