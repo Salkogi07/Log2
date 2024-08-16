@@ -1700,6 +1700,7 @@ MonoBehaviour:
   losePanel: {fileID: 240946247}
   levelUpPanel: {fileID: 917628163}
   isEnemyMove: 1
+  Enemy_SkillTime: 0
 --- !u!1 &293211327
 GameObject:
   m_ObjectHideFlags: 0
@@ -2678,6 +2679,7 @@ GameObject:
   m_Component:
   - component: {fileID: 560824285}
   - component: {fileID: 560824286}
+  - component: {fileID: 560824287}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -2748,6 +2750,22 @@ MonoBehaviour:
   - {fileID: 3514985232841575107, guid: a68f6c9d9859b4d4898589091ad2678b, type: 3}
   spanwpoint: []
   spawnTime: 2
+--- !u!114 &560824287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 560824284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9cc04a78a2445b4b997e44e9e07f4cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items: []
+  spanwInterval: 5
+  spawnAreaMin: {x: -10, y: -10}
+  spawnAreaMax: {x: 10, y: 10}
 --- !u!1 &564190752
 GameObject:
   m_ObjectHideFlags: 0

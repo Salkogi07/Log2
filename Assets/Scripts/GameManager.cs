@@ -81,6 +81,7 @@ public class GameManager : MonoBehaviour
     public GameObject levelUpPanel;
 
     public bool isEnemyMove = true;
+    public float Enemy_SkillTime = 0;
 
 
     private void Awake()
@@ -230,6 +231,33 @@ public class GameManager : MonoBehaviour
         this.mana = Mathf.Clamp(this.mana + mana, 0, maxMana);
     }
 
+    public void Use_ItemSheild()
+    {
+        item_ShieldTimer = 3;
+    }
+    public bool Is_ItemSheild()
+    {
+        return item_ShieldTimer > 0;
+    }
+
+    public void Use_ItemStopEnemy()
+    {
+        item_StopEnemyTimer = 1;
+    }
+    public bool Is_ItemStopEnemy()
+    {
+        return item_StopEnemyTimer > 0;
+    }
+
+    public void Use_SkillStop()
+    {
+        Enemy_SkillTime = 1;
+    }
+    public bool Is_SkillStop()
+    {
+        return Enemy_SkillTime > 0;
+    }
+
     public void GameWin()
     {
         StartCoroutine(GameWinRoutine());
@@ -281,6 +309,29 @@ public class GameManager : MonoBehaviour
     public void Ending()
     {
         SceneManager.LoadScene(4);
+    }
+
+    public void UseItem(int type)
+    {
+        InfoType infoType = (InfoType)type;
+        switch (infoType)
+        {
+            case InfoType.Exp:
+                AddExp(30000);
+                break;
+            case InfoType.Speed:
+                SpeedUP();
+                break;
+            case InfoType.Shield:
+                Use_ItemSheild();
+                break;
+            case InfoType.Heal:
+                AddHp(10);
+                break;
+            case InfoType.Stop:
+                Use_ItemStopEnemy();
+                break;
+        }
     }
 
     void SpeedUP()
