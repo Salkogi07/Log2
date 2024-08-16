@@ -308,26 +308,31 @@ public class GameManager : MonoBehaviour
 
     public void Menu()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(0);
     }
 
     public void Stage1()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(1);
     }
 
     public void Stage2()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(2);
     }
 
     public void Stage3()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(3);
     }
 
     public void Ending()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(4);
     }
 

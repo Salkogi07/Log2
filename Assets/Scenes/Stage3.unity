@@ -2066,7 +2066,7 @@ MonoBehaviour:
   item_StopEnemyTimer: 0
   player: {fileID: 0}
   isBossSpawned: 0
-  bossObj: {fileID: 3514985232841575107, guid: 1bbb1b3a70a7c974e8d2b38c0f79ad5b, type: 3}
+  bossObj: {fileID: 3514985232841575107, guid: 1a4cd075eba81744fa08ae47d14897df, type: 3}
   HUDPanel: {fileID: 464358391}
   winPanel: {fileID: 1417306010}
   losePanel: {fileID: 240946247}
