@@ -57,7 +57,7 @@ public class Spawner : MonoBehaviour
             return;
 
         int enemyRandom = Random.Range(0, prefab.Length);
-        int enemyPos = Random.Range(0, spanwpoint.Length);
+        int enemyPos = Random.Range(1, spanwpoint.Length);
         Instantiate(prefab[enemyRandom], spanwpoint[enemyPos].position, Quaternion.identity);
     }
 }

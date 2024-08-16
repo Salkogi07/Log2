@@ -8,11 +8,15 @@ public class ItemType : MonoBehaviour
     private SpriteRenderer sprite;
     public AudioClip pickupSound; // 아이템을 먹을 때 재생할 소리
     private AudioSource audioSource; // 오디오 소스를 저장할 변수
+    private Collider2D coll;
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
         sprite = GetComponent<SpriteRenderer>();
+        coll = GetComponent<Collider2D>();
+
+        Destroy(gameObject, 10f);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -24,6 +28,7 @@ public class ItemType : MonoBehaviour
             audioSource.PlayOneShot(pickupSound);
 
             sprite.enabled = false;
+            coll.enabled = false;
             Destroy(gameObject, pickupSound.length);
         }
     }

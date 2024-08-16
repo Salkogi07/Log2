@@ -14,15 +14,21 @@ public class Enemy : MonoBehaviour
 
     Rigidbody2D rb;
     SpriteRenderer sprite;
+    Collider2D coll;
     WaitForFixedUpdate wait;
     public GameObject hitPartical;
     public GameObject diePartical;
 
+    public AudioClip Sound; // 아이템을 먹을 때 재생할 소리
+    private AudioSource audioSource; // 오디오 소스를 저장할 변수
+
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         wait = new WaitForFixedUpdate();
+        coll = GetComponent<Collider2D>();
     }
 
     private void FixedUpdate()
@@ -70,6 +76,7 @@ public class Enemy : MonoBehaviour
 
         if(health > 0)
         {
+            audioSource.PlayOneShot(Sound);
             Instantiate(hitPartical,gameObject.transform.position,Quaternion.identity);
         }
         else
@@ -77,15 +84,21 @@ public class Enemy : MonoBehaviour
             if (gameObject.CompareTag("Boss"))
             {
                 GameManager.instance.GameWin();
+                audioSource.PlayOneShot(Sound);
+                sprite.enabled = false;
+                coll.enabled = false;
                 Instantiate(diePartical,gameObject.transform.position,Quaternion.identity);
-                Destroy(gameObject);
+                Destroy(gameObject,Sound.length);
             }
             else
             {
                 GameManager.instance.killEnemyCount++;
                 GameManager.instance.AddExp(getExp);
+                audioSource.PlayOneShot(Sound);
+                sprite.enabled = false;
+                coll.enabled = false;
                 Instantiate(diePartical,gameObject.transform.position,Quaternion.identity);
-                Destroy(gameObject);
+                Destroy(gameObject,Sound.length);
             }
         }
     }
