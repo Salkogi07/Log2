@@ -2762,7 +2762,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9cc04a78a2445b4b997e44e9e07f4cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items: []
+  items:
+  - {fileID: 8589812497425197900, guid: 34b0c6aa92243004d9b99d78607ae423, type: 3}
+  - {fileID: 8589812497425197900, guid: f60335f0064f876478b6ab21075973b3, type: 3}
+  - {fileID: 8589812497425197900, guid: 11d10a5573a90f14d85894da7a1fd1f0, type: 3}
+  - {fileID: 8589812497425197900, guid: 6db47a70b703f0243948ecccd07c03d2, type: 3}
+  - {fileID: 8589812497425197900, guid: f290e1648be12284f86405ff63a72663, type: 3}
   spanwInterval: 5
   spawnAreaMin: {x: -10, y: -10}
   spawnAreaMax: {x: 10, y: 10}
@@ -3464,7 +3469,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 15
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
