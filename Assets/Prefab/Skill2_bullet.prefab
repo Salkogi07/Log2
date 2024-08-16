@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   damage: 100
-  duringObject: 0.5
+  duringObject: 0.7
 --- !u!58 &2346271330894910643
 CircleCollider2D:
   m_ObjectHideFlags: 0
