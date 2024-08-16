@@ -15,9 +15,10 @@ GameObject:
   - component: {fileID: 8551338610840847314}
   - component: {fileID: 5686768332191299504}
   - component: {fileID: 982845383793334302}
+  - component: {fileID: 3496433917906160760}
   - component: {fileID: -4627927609494061140}
   m_Layer: 6
-  m_Name: Enemy_A
+  m_Name: Enemy_D
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,7 +81,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 1957836303, guid: bd94b601e492445429c08d43eaa6cba3, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5849056, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -206,6 +207,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 216bf823de783b64092d4b056f19f92b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3496433917906160760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3514985232841575107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43afc5a8002e2904299983f3995a510d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Skill_Interval: 5
 --- !u!82 &-4627927609494061140
 AudioSource:
   m_ObjectHideFlags: 0

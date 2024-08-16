@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System;
-using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -80,8 +78,17 @@ public class GameManager : MonoBehaviour
     public GameObject winPanel;
     public GameObject losePanel;
     public GameObject levelUpPanel;
+
+    public GameObject EnemySetPanel;
+    public GameObject ItmeSetPanel;
+
+    public GameObject skillstopObj;
+
     public BackgroundSound sound;
     public LevelUpSound levelUpSound;
+
+    public Spawner spawner;
+
 
     public bool isEnemyMove = true;
     public float Enemy_SkillTime = 0;
@@ -96,6 +103,10 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         sound.NoBossSound();
+        health = maxHealth;
+        Time.timeScale = 1f;
+        IsLive = true;
+        HUDPanel.SetActive(true);
     }
 
     private void Update()
@@ -107,9 +118,12 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        Enemy_SkillTime -= Time.deltaTime;
+        skillstopObj.SetActive(Is_SkillStopEnemy());
+
         gameTime += Time.deltaTime;
 
-        if(gameTime > maxGameTime && !isBossSpawned)
+        if (gameTime > maxGameTime && !isBossSpawned)
         {
             gameTime = maxGameTime;
             isBossSpawned = true;
@@ -159,12 +173,14 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F5))
         {
-            //ItmeSetPanel.SetActive(!ItmeSetPanel.activeInHierarchy);
+            EnemySetPanel.SetActive(false);
+            ItmeSetPanel.SetActive(!ItmeSetPanel.activeInHierarchy);
         }
 
         if (Input.GetKeyDown(KeyCode.F6))
         {
-            //EnemySetPanel.SetActive(!EnemySetPanel.activeInHierarchy);
+            ItmeSetPanel.SetActive(false);
+            EnemySetPanel.SetActive(!EnemySetPanel.activeInHierarchy);
         }
 
         if (Input.GetKeyDown(KeyCode.F7))
@@ -217,14 +233,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void GameStart()
-    {
-        health = maxHealth;
-        Time.timeScale = 1f;
-        IsLive = true;
-        HUDPanel.SetActive(true);
-    }
-
     public void AddExp(int exp)
     {
         this.exp += exp;
@@ -259,11 +267,11 @@ public class GameManager : MonoBehaviour
         return item_StopEnemyTimer > 0;
     }
 
-    public void Use_SkillStop()
+    public void Use_SkillStopEnemy()
     {
         Enemy_SkillTime = 1;
     }
-    public bool Is_SkillStop()
+    public bool Is_SkillStopEnemy()
     {
         return Enemy_SkillTime > 0;
     }
@@ -323,13 +331,19 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(4);
     }
 
+    public void SpawnCheatEnemy(int level)
+    {
+        int enemyPos = Random.Range(1, spawner.spanwpoint.Length);
+        Instantiate(spawner.prefab[level], spawner.spanwpoint[enemyPos].position, Quaternion.identity);
+    }
+
     public void UseItem(int type)
     {
         InfoType infoType = (InfoType)type;
         switch (infoType)
         {
             case InfoType.Exp:
-                AddExp(30000);
+                AddExp(30);
                 break;
             case InfoType.Speed:
                 SpeedUP();
@@ -338,7 +352,8 @@ public class GameManager : MonoBehaviour
                 Use_ItemSheild();
                 break;
             case InfoType.Heal:
-                AddHp(10);
+                AddHp(30);
+                AddMana(20);
                 break;
             case InfoType.Stop:
                 Use_ItemStopEnemy();

@@ -1753,7 +1753,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 292087571}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: Stage1
+        m_MethodName: Stage3
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2033,7 +2033,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsLive: 1
-  gameTime: 0
+  gameTime: 120
   maxGameTime: 120
   health: 100
   maxHealth: 100
@@ -2052,7 +2052,7 @@ MonoBehaviour:
   skill3_playerAttackCooldown: 0.2
   skill3_UseMana: 20
   skill4_UseMana: 30
-  playerAttack_damage: 11
+  playerAttack_damage: 18
   playerAttack_cooldown: 1
   playerBullet_scale: 1
   playerBulletSize_UpgradeLevel: 0
@@ -2061,7 +2061,7 @@ MonoBehaviour:
   playerAttackSpeed_UpgradeLevelMax: 3
   playerAttackDamage_UpgradeLevel: 0
   playerAttackDamage_UpgradeLevelMax: 5
-  manaRechargeRate: 1.5
+  manaRechargeRate: 10
   item_ShieldTimer: 0
   item_StopEnemyTimer: 0
   player: {fileID: 0}
@@ -2338,7 +2338,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 292087571}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: Stage2
+        m_MethodName: Ending
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3490,6 +3490,8 @@ MonoBehaviour:
   - {fileID: 3514985232841575107, guid: a68f6c9d9859b4d4898589091ad2678b, type: 3}
   - {fileID: 3514985232841575107, guid: 58b8e9807fcfe6f499f674213fb8018c, type: 3}
   - {fileID: 3514985232841575107, guid: 40ad1994f9735624ba86607e696f358a, type: 3}
+  - {fileID: 3514985232841575107, guid: 0eaf4d82c7bfc164e8f0b48d3d8ecb59, type: 3}
+  - {fileID: 3514985232841575107, guid: be867c5f7889bce47901e2acad8a3b64, type: 3}
   spanwpoint: []
   spawnTime: 2
 --- !u!114 &560824287

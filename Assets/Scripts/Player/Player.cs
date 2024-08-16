@@ -27,21 +27,25 @@ public class Player : MonoBehaviour
         if (!GameManager.instance.IsLive)
             return;
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+
+        if (!GameManager.instance.Is_SkillStopEnemy())
         {
-            skill.UseSkill1();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            skill.UseSkill2();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            skill.UseSkill3();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            skill.UseSkill4();
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                skill.UseSkill1();
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                skill.UseSkill2();
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                skill.UseSkill3();
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                skill.UseSkill4();
+            }
         }
 
         speed = GameManager.instance.speed;
@@ -98,14 +102,20 @@ public class Player : MonoBehaviour
 
         if (collision.CompareTag("EnemyBullet"))
         {
+            GameManager.instance.health -= collision.GetComponent<EnemyBullet>().damage;
+
             if (GameManager.instance.health < 0)
             {
                 for (int index = 2; index < transform.childCount; index++)
                 {
                     transform.GetChild(index).gameObject.SetActive(false);
                 }
+
+                anim.SetTrigger("Dead");
+                GameManager.instance.GameOver();
             }
-            GameManager.instance.GameOver();
+
+            Destroy(collision.gameObject);
         }
     }
 }
