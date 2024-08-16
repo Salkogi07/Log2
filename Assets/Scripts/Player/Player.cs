@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
     Animator anim;
     PlayerSkill skill;
 
+    public GameObject shield;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -45,6 +47,8 @@ public class Player : MonoBehaviour
         speed = GameManager.instance.speed;
         inputVec.x = Input.GetAxisRaw("Horizontal");
         inputVec.y = Input.GetAxisRaw("Vertical");
+
+        shield.SetActive(!GameManager.instance.isDamge);
     }
 
     private void FixedUpdate()

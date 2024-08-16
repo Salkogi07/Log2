@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -79,6 +80,8 @@ public class GameManager : MonoBehaviour
     public GameObject winPanel;
     public GameObject losePanel;
     public GameObject levelUpPanel;
+    public BackgroundSound sound;
+    public LevelUpSound levelUpSound;
 
     public bool isEnemyMove = true;
     public float Enemy_SkillTime = 0;
@@ -88,6 +91,11 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
+
+    private void Start()
+    {
+        sound.NoBossSound();
     }
 
     private void Update()
@@ -174,6 +182,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(enemyObj);
         }
+        sound.BossSound();
         Instantiate(bossObj,player.transform.position + Vector3.up * 4, Quaternion.identity);
     }
 
@@ -202,6 +211,7 @@ public class GameManager : MonoBehaviour
             if(playerLevel < maxAbilityLevel)
             {
                 Time.timeScale = 0f;
+                levelUpSound.LevelPlaySound();
                 levelUpPanel.SetActive(true);
             }
         }
@@ -270,6 +280,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator GameWinRoutine()
     {
+        sound.StopSound();
         IsLive = false;
         HUDPanel.SetActive(false);
         yield return new WaitForSeconds(1f);
@@ -279,6 +290,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator GameOverRoutine()
     {
+        sound.StopSound();
         IsLive = false;
         HUDPanel.SetActive(false);
         yield return new WaitForSeconds(0.5f);

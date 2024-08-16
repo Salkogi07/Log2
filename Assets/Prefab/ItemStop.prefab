@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 4
-  pickupSound: {fileID: 8300000, guid: 09d745977488550458c753042279e701, type: 3}
+  pickupSound: {fileID: 8300000, guid: c46eecd6de3a1f84288ef1533c36bcdc, type: 3}
 --- !u!82 &7019403372054631825
 AudioSource:
   m_ObjectHideFlags: 0
@@ -111,7 +111,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 09d745977488550458c753042279e701, type: 3}
+  m_audioClip: {fileID: 8300000, guid: c46eecd6de3a1f84288ef1533c36bcdc, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
