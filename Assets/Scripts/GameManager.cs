@@ -198,10 +198,10 @@ public class GameManager : MonoBehaviour
             playerLevel++;
             exp = 0;
             int maxAbilityLevel = playerBulletSize_UpgradeLevelMax + playerAttackSpeed_UpgradeLevelMax + playerAttackDamage_UpgradeLevelMax + 1;
-            if(playerLevel > maxAbilityLevel)
+            if(playerLevel < maxAbilityLevel)
             {
                 Time.timeScale = 0f;
-                //·¹º§ÆÇ³Ú
+                levelUpPanel.SetActive(true);
             }
         }
     }
@@ -258,6 +258,11 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
     }
 
+    public void Menu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     public void Stage1()
     {
         SceneManager.LoadScene(1);
@@ -276,11 +281,6 @@ public class GameManager : MonoBehaviour
     public void Ending()
     {
         SceneManager.LoadScene(4);
-    }
-
-    public void GameExit()
-    {
-        Application.Quit();
     }
 
     void SpeedUP()

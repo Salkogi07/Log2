@@ -36,7 +36,7 @@ public class StoryText : MonoBehaviour
             yield return StartCoroutine(TypeText(storytext));
             yield return new WaitForSeconds(pauseBetweenTexts);
         }
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
     }
 
     IEnumerator TypeText(string text)
@@ -51,6 +51,6 @@ public class StoryText : MonoBehaviour
 
     public void NextSceneClick()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
     }
 }

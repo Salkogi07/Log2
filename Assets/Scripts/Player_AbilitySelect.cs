@@ -10,7 +10,7 @@ public class Player_AbilitySelect : MonoBehaviour
     {
         if (GameManager.instance.playerBulletSize_UpgradeLevel < GameManager.instance.playerBulletSize_UpgradeLevelMax)
         {
-            GameManager.instance.playerBullet_scale += 1f;
+            GameManager.instance.playerBullet_scale += .4f;
             GameManager.instance.playerBulletSize_UpgradeLevel++;
             itemPanel.SetActive(false);
             Time.timeScale = 1f;
