@@ -293,7 +293,6 @@ public class GameManager : MonoBehaviour
         HUDPanel.SetActive(false);
         yield return new WaitForSeconds(1f);
         winPanel.SetActive(true);
-        Time.timeScale = 0f;
     }
 
     IEnumerator GameOverRoutine()
